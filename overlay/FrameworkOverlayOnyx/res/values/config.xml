@@ -894,6 +894,9 @@
          fp screen off unlock-->
     <bool name="config_screen_off_udfps_default_on">true</bool>
 
+    <!-- Whether the new Auto Selection Network UI should be shown -->
+    <bool name="config_enableNewAutoSelectNetworkUI">true</bool>
+
     <!-- System Info -->
     <integer name="config_sysCPUTempMultiplier">1000</integer>
 </resources>
