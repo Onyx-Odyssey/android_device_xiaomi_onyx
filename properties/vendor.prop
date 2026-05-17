@@ -214,6 +214,9 @@ ro.config.media_vol_steps=25
 ro.config.system_vol_steps=15
 ro.config.vc_call_vol_steps=11
 
+# Netflix
+ro.netflix.bsp_rev=SM8735-40387-1
+
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
 vendor.perf.framepacing.enable=1
