@@ -1,4 +1,4 @@
-set_prop(vendor_init, vendor_camera_prop)
+set_prop(vendor_init, vendor_cgroup_follow_prop)
 set_prop(vendor_init, vendor_deviceid_prop)
 set_prop(vendor_init, vendor_displayfeature_prop)
 set_prop(vendor_init, vendor_mischeck_prop)

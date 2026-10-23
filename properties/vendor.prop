@@ -30,18 +30,8 @@ avf.remote_attestation.enabled=false
 
 # Bluetooth
 bluetooth.profile.asha.central.enabled=true
-bluetooth.profile.bap.broadcast.assist.enabled=true
-bluetooth.profile.bap.broadcast.source.enabled=true
-bluetooth.profile.bap.unicast.client.enabled=true
-bluetooth.profile.ccp.server.enabled=true
-bluetooth.profile.csip.set_coordinator.enabled=true
-bluetooth.profile.hap.client.enabled=true
-bluetooth.profile.mcp.server.enabled=true
-bluetooth.profile.vcp.controller.enabled=true
 persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac-lhdc-mihc
 persist.bluetooth.a2dp_offload.disabled=false
-persist.vendor.btstack.enable.twsplus=true
-persist.vendor.btstack.enable.twsplussho=true
 persist.bluetooth.leaudio_offload.disabled=false
 persist.sys.fflag.override.settings_bluetooth_hearing_aid=false
 persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=true
@@ -76,13 +66,10 @@ ro.egl.blobcache.multifile_limit=33554432
 persist.vendor.fingerprint.type=udfps_optical
 persist.vendor.fingerprint.sensor_location=640|2518|105
 
-# Fling
-ro.min.fling_velocity=160
-ro.max.fling_velocity=20000
+# QTI
 ro.vendor.qti.cgroup_follow.enable=true
 persist.vendor.qti.inputopts.enable=true
 persist.vendor.qti.inputopts.movetouchslop=0.6
-ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
 
 # FUSE
 persist.sys.fuse.passthrough.enable=true
@@ -92,7 +79,6 @@ vendor.gatekeeper.disable_spu=true
 vendor.gatekeeper.is_security_level_spu=0
 
 # Graphics
-debug.graphics.game_default_frame_rate.disabled=1
 debug.hwui.skia_atrace_enabled=false
 debug.mdpcomp.logs=0
 debug.sf.auto_latch_unsignaled=1
@@ -182,7 +168,6 @@ vendor.display.disable_system_load_check=1
 vendor.display.enable_async_powermode=0
 vendor.display.enable_async_vds_creation=1
 vendor.display.enable_dpps_dynamic_fps=1
-vendor.display.enable_hdr10_gpu_target=1
 vendor.display.enable_optimize_refresh=0
 vendor.display.enable_rc_support=1
 vendor.display.use_smooth_motion=1
@@ -279,7 +264,6 @@ debug.renderengine.vulkan=true
 debug.renderengine.graphite=true
 debug.renderengine.backend=skiavkthreaded
 debug.stagefright.renderengine.backend=threaded
-renderthread.skia.reduceopstasksplitting=true
 
 # Performance
 debug.performance.tuning=1
