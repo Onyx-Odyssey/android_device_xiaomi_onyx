@@ -1,3 +1,7 @@
+# Bluetooth
+persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
+
 # CameraX
 ro.camerax.extensions.enabled=true
 
@@ -10,6 +14,9 @@ ro.product.mod_device=onyx_global
 
 # GPS
 persist.backup.ntpServer=0.pool.ntp.org
+
+# GPU
+ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
 
 # HWUI
 debug.hwui.skia_tracing_enabled=false
@@ -26,6 +33,11 @@ ro.hwui.text_small_cache_height=1024
 ro.hwui.text_small_cache_width=1024
 ro.hwui.texture_cache_flushrate=0.4
 ro.hwui.texture_cache_size=72
+renderthread.skia.reduceopstasksplitting=true
+
+# Input
+ro.max.fling_velocity=20000
+ro.min.fling_velocity=160
 
 # Media
 media.stagefright.thumbnail.prefer_hw_codecs=true

@@ -1,0 +1,4 @@
+# The Adreno driver probes this unregistered /unsigned hexlp instance from every GPU process.
+type vendor_hexlp_unsigned_service, service_manager_type;
+
+dontaudit domain vendor_hexlp_unsigned_service:service_manager find;
