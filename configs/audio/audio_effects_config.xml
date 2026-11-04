@@ -93,7 +93,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
     <postprocess>
         <stream type="music">
             <!-- <apply effect="music_helper"/> -->
-            <apply effect="dlb_music_listener"/>
+            <!-- corrupts the 864-frame block handed to the ULL game output -->
         </stream>
         <!-- <stream type="ring">
             <apply effect="ring_helper"/>
