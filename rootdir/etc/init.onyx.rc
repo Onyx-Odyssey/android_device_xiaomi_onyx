@@ -236,6 +236,10 @@ on property:persist.sys.device_provisioned=1 && property:sys.boot_completed=1
     write /dev/cpuctl/system-background/cpu.uclamp.max 50
     write /dev/cpuctl/dex2oat/cpu.uclamp.max 60
 
+on property:vendor.post_boot.parsed=1
+    # Set restricted cpuset to the same CPUs as system-background
+    copy /dev/cpuset/system-background/cpus /dev/cpuset/restricted/cpus
+
 service vendor.camera-wmfix /vendor/bin/sh /vendor/bin/init.camera.wmfix.sh
     class late_start
     user camera
