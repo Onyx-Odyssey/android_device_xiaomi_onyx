@@ -283,7 +283,7 @@
             "Path": "/sys/devices/system/cpu/cpu2/cpufreq/walt/hispeed_freq",
             "Values": [
                 "1190400",
-                "748"
+                "787200"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -372,7 +372,8 @@
                 "0",
                 "20",
                 "40",
-                "60"
+                "60",
+                "50"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -450,8 +451,7 @@
             "Values": [
                 "264000000",
                 "510000000",
-                "362000000",
-                "644000000"
+                "362000000"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -526,7 +526,9 @@
             "Values": [
                 "364800",
                 "1209600",
-                "1804800"
+                "1804800",
+                "1094400",
+                "1497600"
             ],
             "DefaultIndex": 0,
             "ResetOnInit": true
@@ -790,7 +792,25 @@
         {
             "PowerHint": "CAMERA_STREAMING_LOW",
             "Node": "sysDevicesSystemCpuCpu2CpufreqWaltHispeedFreq",
-            "Value": "748",
+            "Value": "787200",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_LOW",
+            "Node": "UclampTALatency",
+            "Value": "1",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_LOW",
+            "Node": "UclampFGMin",
+            "Value": "30",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_LOW",
+            "Node": "UclampTAMin",
+            "Value": "40",
             "Duration": 0
         },
         {
@@ -916,7 +936,25 @@
         {
             "PowerHint": "CAMERA_STREAMING_MID",
             "Node": "sysDevicesSystemCpuCpu2CpufreqWaltHispeedFreq",
-            "Value": "748",
+            "Value": "787200",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_MID",
+            "Node": "UclampTALatency",
+            "Value": "1",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_MID",
+            "Node": "UclampFGMin",
+            "Value": "50",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_MID",
+            "Node": "UclampTAMin",
+            "Value": "40",
             "Duration": 0
         },
         {
@@ -1024,7 +1062,25 @@
         {
             "PowerHint": "CAMERA_STREAMING_HIGH",
             "Node": "sysDevicesSystemCpuCpu2CpufreqWaltHispeedFreq",
-            "Value": "748",
+            "Value": "787200",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_HIGH",
+            "Node": "UclampTALatency",
+            "Value": "1",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_HIGH",
+            "Node": "UclampFGMin",
+            "Value": "50",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "CAMERA_STREAMING_HIGH",
+            "Node": "UclampTAMin",
+            "Value": "50",
             "Duration": 0
         },
         {
@@ -1043,6 +1099,24 @@
             "PowerHint": "CAMERA_LAUNCH",
             "Node": "devCpuDmaLatency",
             "Value": "1",
+            "Duration": 1000
+        },
+        {
+            "PowerHint": "CAMERA_LAUNCH",
+            "Node": "UclampTALatency",
+            "Value": "1",
+            "Duration": 1000
+        },
+        {
+            "PowerHint": "CAMERA_LAUNCH",
+            "Node": "UclampFGMin",
+            "Value": "50",
+            "Duration": 1000
+        },
+        {
+            "PowerHint": "CAMERA_LAUNCH",
+            "Node": "UclampTAMin",
+            "Value": "40",
             "Duration": 1000
         },
         {
@@ -1145,13 +1219,13 @@
             "PowerHint": "INTERACTION",
             "Node": "UclampTAMin",
             "Duration": 0,
-            "Value": "20"
+            "Value": "40"
         },
         {
             "PowerHint": "INTERACTION",
             "Node": "UclampFGMin",
             "Duration": 0,
-            "Value": "20"
+            "Value": "30"
         },
         {
             "PowerHint": "INTERACTION",
@@ -1176,6 +1250,18 @@
             "Node": "CPUBWMinFreq",
             "Duration": 0,
             "Value": "1708000"
+        },
+        {
+            "PowerHint": "INTERACTION",
+            "Node": "L3MinFreq",
+            "Value": "1094400",
+            "Duration": 0
+        },
+        {
+            "PowerHint": "INTERACTION",
+            "Node": "UclampTALatency",
+            "Value": "1",
+            "Duration": 0
         },
         {
             "PowerHint": "INTERACTION",
@@ -1205,7 +1291,7 @@
             "PowerHint": "INTERACTION",
             "Node": "GPUMinFreq",
             "Duration": 0,
-            "Value": "510000000"
+            "Value": "362000000"
         },
         {
             "PowerHint": "INTERACTION",
@@ -1323,6 +1409,12 @@
         },
         {
             "PowerHint": "LAUNCH",
+            "Node": "L3MinFreq",
+            "Value": "1497600",
+            "Duration": 2000
+        },
+        {
+            "PowerHint": "LAUNCH",
             "Node": "GPUMinFreq",
             "Duration": 2000,
             "Value": "510000000"
@@ -1332,6 +1424,12 @@
             "Node": "GPUIdleTimer",
             "Duration": 2000,
             "Value": "5000"
+        },
+        {
+            "PowerHint": "LAUNCH",
+            "Node": "devCpuDmaLatency",
+            "Value": "1",
+            "Duration": 2000
         },
         {
             "PowerHint": "EXPENSIVE_RENDERING",
@@ -1361,7 +1459,7 @@
             "PowerHint": "EXPENSIVE_RENDERING",
             "Node": "GPUMinFreq",
             "Duration": 0,
-            "Value": "644000000"
+            "Value": "362000000"
         },
         {
             "PowerHint": "EXPENSIVE_RENDERING",
