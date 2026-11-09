@@ -369,25 +369,25 @@
             "Name": "UclampTAMin",
             "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
             "Values": [
-                "0",
-                "20",
-                "40",
                 "60",
-                "50"
+                "50",
+                "40",
+                "20",
+                "0"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 4,
             "ResetOnInit": true
         },
         {
             "Name": "UclampFGMin",
             "Path": "/dev/cpuctl/foreground/cpu.uclamp.min",
             "Values": [
-                "0",
-                "20",
+                "50",
                 "30",
-                "50"
+                "20",
+                "0"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 3,
             "ResetOnInit": true
         },
         {
