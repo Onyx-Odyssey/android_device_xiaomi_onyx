@@ -4,44 +4,44 @@
             "Name": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveHighFreq",
             "Path": "/sys/devices/system/cpu/cpufreq/policy0/walt/adaptive_high_freq",
             "Values": [
-                "0",
+                "1785600",
                 "1632000",
-                "1785600"
+                "0"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 2,
             "ResetOnInit": true
         },
         {
             "Name": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveLowFreq",
             "Path": "/sys/devices/system/cpu/cpufreq/policy0/walt/adaptive_low_freq",
             "Values": [
-                "0",
+                "1516800",
                 "1401600",
-                "1516800"
+                "0"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 2,
             "ResetOnInit": true
         },
         {
             "Name": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveLevel1",
             "Path": "/sys/devices/system/cpu/cpufreq/policy0/walt/adaptive_level_1",
             "Values": [
-                "0",
+                "1190400",
                 "748800",
-                "1190400"
+                "0"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 2,
             "ResetOnInit": true
         },
         {
             "Name": "procSysWaltSchedBoost",
             "Path": "/proc/sys/walt/sched_boost",
             "Values": [
-                "0",
+                "2",
                 "1",
-                "2"
+                "0"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 2,
             "ResetOnInit": true
         },
         {
@@ -394,55 +394,55 @@
             "Name": "CPULittleClusterMinFreq",
             "Path": "/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq",
             "Values": [
-                "441600",
+                "2016000",
                 "1516800",
                 "1286400",
                 "1190400",
                 "614400",
-                "2016000"
+                "441600"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 5,
             "ResetOnInit": true
         },
         {
             "Name": "CPUMidClusterMinFreq",
             "Path": "/sys/devices/system/cpu/cpufreq/policy2/scaling_min_freq",
             "Values": [
-                "480000",
+                "3014400",
                 "1516800",
                 "1286400",
                 "1056000",
                 "633600",
-                "3014400"
+                "480000"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 5,
             "ResetOnInit": true
         },
         {
             "Name": "CPUGoldClusterMinFreq",
             "Path": "/sys/devices/system/cpu/cpufreq/policy5/scaling_min_freq",
             "Values": [
-                "480000",
+                "2803200",
                 "1516800",
                 "1286400",
                 "1056000",
                 "633600",
-                "2803200"
+                "480000"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 5,
             "ResetOnInit": true
         },
         {
             "Name": "CPUPrimeClusterMinFreq",
             "Path": "/sys/devices/system/cpu/cpufreq/policy7/scaling_min_freq",
             "Values": [
-                "480000",
+                "2956800",
                 "1478400",
                 "1228800",
                 "787200",
-                "2956800"
+                "480000"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 4,
             "ResetOnInit": true
         },
         {
@@ -460,11 +460,11 @@
             "Name": "GPUIdleTimer",
             "Path": "/sys/class/kgsl/kgsl-3d0/idle_timer",
             "Values": [
-                "80",
+                "5000",
                 "2000",
-                "5000"
+                "80"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 2,
             "ResetOnInit": true
         },
         {
@@ -513,24 +513,24 @@
             "Name": "LLCCBWMinFreq",
             "Path": "/sys/devices/system/cpu/bus_dcvs/LLCC/boost_freq",
             "Values": [
-                "350000",
+                "1066000",
                 "600000",
-                "1066000"
+                "350000"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 2,
             "ResetOnInit": true
         },
         {
             "Name": "L3MinFreq",
             "Path": "/sys/devices/system/cpu/bus_dcvs/L3/boost_freq",
             "Values": [
-                "364800",
-                "1209600",
                 "1804800",
+                "1497600",
+                "1209600",
                 "1094400",
-                "1497600"
+                "364800"
             ],
-            "DefaultIndex": 0,
+            "DefaultIndex": 4,
             "ResetOnInit": true
         },
         {
