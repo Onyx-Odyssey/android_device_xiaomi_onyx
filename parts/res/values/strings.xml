@@ -1,9 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     SPDX-FileCopyrightText: The LineageOS Project
-     SPDX-License-Identifier: Apache-2.0
+     Copyright (C) 2020 The LineageOS Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
 -->
-<resources>
-    <!-- App Name -->
-    <string name="app_name">Xiaomi Parts</string>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Xiaomi Settings -->
+    <string name="app_title">Onyx Parts</string>
+    <string name="tile_add">Add tile</string>
+    <string name="tile_added">Tile added</string>
+    <string name="tile_not_added">Tile not added</string>
+    <string name="tile_already_added">Tile already added</string>
+    <string name="tile_on">On</string>
+    <string name="tile_off">Off</string>
+
+    <!-- Thermal Profiles -->
+    <string name="thermal_title">Thermal profiles</string>
+    <string name="thermal_enable">Use thermal profiles</string>
+    <string name="thermal_summary">Per-app thermal profile configuration</string>
+    <string name="thermal_apps_title">Apps</string>
+    <string name="thermal_loading">Loading...</string>
+    <string name="thermal_default">Default</string>
+    <string name="thermal_benchmark">Benchmark</string>
+    <string name="thermal_browser">Browser</string>
+    <string name="thermal_camera">Camera</string>
+    <string name="thermal_dialer">Dialer</string>
+    <string name="thermal_gaming">Gaming</string>
+    <string name="thermal_navigation">Navigation</string>
+    <string name="thermal_streaming">Streaming</string>
+    <string name="thermal_video">Video</string>
+    <string name="thermal_reset">Reset to defaults</string>
+    <string name="thermal_reset_message">Are you sure you want to reset thermal profile for all apps?</string>
+
+    <!-- Per-app refresh rate -->
+    <string name="refresh_title">Per-app refresh rate</string>
+    <string name="refresh_summary">Set the maximum refresh rate for a specific application</string>
+    <string name="refresh_search">Search apps</string>
+    <string name="refresh_default">Default</string>
+    <string name="refresh_60">60Hz</string>
+    <string name="refresh_90">90Hz</string>
+    <string name="refresh_120">120Hz</string>
+    <string name="refresh_60_land">60Hz on Landscape</string>
+    <string name="refresh_90_land">90Hz on Landscape</string>
+    <string name="refresh_120_land">120Hz on Landscape</string>
+
+    <!-- Clear Speaker -->
+    <string name="clear_speaker_title">Clear speaker</string>
+    <string name="clear_speaker_summary">Play a 30-second audio to clear the speaker</string>
+    <string name="clear_speaker_description">Run this feature once or twice if you find that your
+          speaker is lightly blocked by dust. Set media volume to maximum.\n\nIf the speaker is
+          blocked heavily, run this feature 2-5 times while shaking your device with the speaker
+          facing downwards.</string>
+
+    <!-- Saturation -->
+    <string name="saturation_title">Display Saturation</string>
+    <string name="saturation_summary">Control the saturation level of the display</string>
+    <string name="saturation_actions">Saturation actions</string>
+    <string name="saturation_reset">Reset saturation to default</string>
+    <string name="saturation_footer_summary">Changing the color mode in display settings will
+          override the saturation level, requiring it to be reapplied.</string>
+
+    <!-- Image preview -->
+    <string name="image_preview_content_description">Preview</string>
+    <string name="image_preview_next_page_content_description">Next</string>
+    <string name="image_preview_previous_page_content_description">Previous</string>
+
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong
+          tap to set</string>
+    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+
+    <!-- Core Control -->
+    <string name="core_control_title">Core Control</string>
+    <string name="core_control_summary">Manually enable or disable individual CPU cores</string>
+    <string name="core_control_description">Advanced CPU control. Turning off cores may save battery or thermal load, but may affect performance and stability.\n\nAt least one little core must remain online at all times.</string>
+    <string name="core_0">Core 0 (Little)</string>
+    <string name="core_1">Core 1 (Little)</string>
+    <string name="core_2">Core 2 (Big)</string>
+    <string name="core_3">Core 3 (Big)</string>
+    <string name="core_4">Core 4 (Big)</string>
+    <string name="core_5">Core 5 (Big)</string>
+    <string name="core_6">Core 6 (Big)</string>
+    <string name="core_7">Core 7 (Prime)</string>
+
+    <!-- Kernel Manager -->
+    <string name="kernel_manager_title">Kernel Manager</string>
+    <string name="kernel_manager_summary">Manage CPU frequencies and governor</string>
+    <string name="cpu_governor_title">CPU Governor</string>
+    <string name="cpu_governor_summary">Current: %s</string>
+    <string name="cpu_min_freq_title">Minimum Frequency</string>
+    <string name="cpu_max_freq_title">Maximum Frequency</string>
+    <string name="efficiency_cluster_title">Efficiency Cluster</string>
+    <string name="performance_cluster_title">Performance Cluster</string>
+    <string name="kernel_info_category">Information</string>
+    <string name="kernel_info_title">About Kernel Manager</string>
+    <string name="kernel_info_summary">Manage CPU governor and frequency scaling for all CPU clusters. Changes may affect performance and battery life.</string>
+    <string name="apply_settings">Apply Settings</string>
+    <string name="apply_on_boot_title">Apply on Boot</string>
+    <string name="apply_on_boot_summary">Automatically apply these settings when the device boots</string>
+    <string name="reset_settings">Reset to Default</string>
+    <string name="settings_applied">Settings applied successfully</string>
+    <string name="settings_reset">Settings reset to default</string>
+    <string name="kernel_value_unavailable">Unavailable</string>
+
+    <!-- GPU Manager -->
+    <string name="gpu_manager_title">GPU Manager</string>
+    <string name="gpu_manager_summary">Manage GPU frequencies and power settings</string>
+    <string name="gpu_governor_title">GPU Governor</string>
+    <string name="gpu_governor_summary">Current: %s</string>
+    <string name="gpu_freq_title">GPU Frequencies</string>
+    <string name="gpu_min_freq_title">Minimum Frequency</string>
+    <string name="gpu_max_freq_title">Maximum Frequency</string>
+    <string name="gpu_current_freq_title">Current Frequency</string>
+    <string name="gpu_power_title">Power Settings</string>
+    <string name="gpu_force_clk_on_title">Force Clock On</string>
+    <string name="gpu_force_clk_on_summary">Keep GPU clock always on</string>
+    <string name="gpu_force_bus_on_title">Force Bus On</string>
+    <string name="gpu_force_bus_on_summary">Keep GPU bus always on</string>
+    <string name="gpu_force_rail_on_title">Force Rail On</string>
+    <string name="gpu_force_rail_on_summary">Keep GPU power rail always on</string>
+    <string name="gpu_force_no_nap_title">Force No Nap</string>
+    <string name="gpu_force_no_nap_summary">Disable GPU napping between frames</string>
+    <string name="gpu_bus_split_title">Bus Split</string>
+    <string name="gpu_bus_split_summary">Enable GPU bus splitting</string>
+    <string name="gpu_thermal_title">Thermal Status</string>
+    <string name="gpu_thermal_pwrlevel_title">Thermal Power Level</string>
+    <string name="gpu_thermal_pwrlevel_summary">Current thermal power level</string>
+    <string name="gpu_temp_title">GPU Temperature</string>
+    <string name="gpu_info_title">GPU Information</string>
+    <string name="gpu_model_title">GPU Model</string>
+    <string name="gpu_busy_percentage_title">GPU Load</string>
+    <string name="gpu_reset_count_title">Reset Count</string>
+    <string name="gpu_preempt_count_title">Preemption Count</string>
+    <string name="gpu_info_category">GPU Information</string>
+    <string name="gpu_settings_category">GPU Settings</string>
+    <string name="gpu_advanced_category">Advanced Settings</string>
+    <string name="gpu_info_summary">Manage GPU frequency scaling and power settings. Changes may affect performance and battery life.</string>
+
+    <!-- Onyx Parts -->
+    <string name="onyx_parts_title">Onyx Parts</string>
+    <string name="onyx_parts_summary">Hardware controls</string>
+    <string name="onyx_parts_description">Adjust CPU, GPU, thermal, display, and speaker settings.</string>
+    <string name="onyx_dashboard_title">ONYX PARTS</string>
+    <string name="onyx_dashboard_subtitle">HARDWARE CONTROLS</string>
+    <string name="onyx_system_utilities">SYSTEM UTILITIES</string>
+    <string name="onyx_navigate_back">Navigate back</string>
+    <string name="onyx_open_feature">Open %s</string>
+    <string name="onyx_engine_content_description">Onyx Engine</string>
+    <string name="onyx_hero_prompt">Status:</string>
+    <string name="onyx_hero_terminal">Ready</string>
+    <string name="onyx_supported_devices">POCO F7</string>
+    <string name="onyx_system_performance_optimized">System is Yours</string>
+    <string name="onyx_core_control_summary">Enable or disable CPU cores</string>
+    <string name="onyx_kernel_manager_summary">Adjust CPU frequencies and governors</string>
+    <string name="onyx_gpu_manager_summary">Adjust GPU frequencies and power</string>
+    <string name="onyx_thermal_engine_summary">Choose per-app thermal profiles</string>
+    <string name="onyx_display_labs_title">Display saturation</string>
+    <string name="onyx_display_labs_summary">Adjust display color saturation</string>
+    <string name="onyx_clear_speaker_summary">Play audio through the speaker</string>
+    <string name="onyx_smooth_display_summary">Set the maximum refresh rate for a specific application</string>
+
 </resources>
