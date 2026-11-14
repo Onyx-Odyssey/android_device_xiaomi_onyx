@@ -43,6 +43,8 @@ on boot
 
     #MIUI ADD:Thermal_NodeReq
     chown system system /sys/class/thermal/thermal_message/sconfig
+    # 0666 so NotGameTurbo (platform_app) can write the thermal scenario.
+    chmod 0666 /sys/class/thermal/thermal_message/sconfig
     chown system system /sys/class/thermal/thermal_message/balance_mode
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/torch_real_level
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/flash_state
