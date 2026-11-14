@@ -1,3 +1,7 @@
 # FPS info
 allow platform_app vendor_sysfs_graphics:dir search;
 allow platform_app vendor_sysfs_graphics:file r_file_perms;
+
+# GameMode thermal management
+allow platform_app sysfs_thermal:dir { search getattr };
+allow platform_app sysfs_thermal:file { write };
