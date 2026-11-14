@@ -1,1 +1,5 @@
+# PowerInsight reads onyx battery nodes labelled vendor_sysfs_xm_power.
+allow system_server vendor_sysfs_xm_power:dir search;
+allow system_server vendor_sysfs_xm_power:file r_file_perms;
+
 allow system_server vendor_sysfs_battery_supply:file r_file_perms;
