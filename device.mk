@@ -190,6 +190,8 @@ $(call soong_config_set,surfaceflinger,frame_rate_category_high,120)
 $(call soong_config_set,surfaceflinger,frame_rate_category_min,60)
 
 # DRM
+PRODUCT_PACKAGES += duck_rkp
+
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 

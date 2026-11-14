@@ -920,4 +920,7 @@
 
     <!-- System Info -->
     <integer name="config_sysCPUTempMultiplier">1000</integer>
+
+    <!-- Divisor PowerInsight applies to the battery current reading it samples. -->
+    <integer name="config_powerInsightCurrentDivisor">-1</integer>
 </resources>
