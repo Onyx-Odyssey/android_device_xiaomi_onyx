@@ -1,0 +1,13 @@
+# GPU (KGSL) control and telemetry (GPU Manager)
+allow parts_app vendor_sysfs_kgsl:dir r_dir_perms;
+allow parts_app vendor_sysfs_kgsl:file rw_file_perms;
+allow parts_app vendor_sysfs_kgsl:lnk_file r_file_perms;
+allow parts_app vendor_sysfs_kgsl_gpuclk:file rw_file_perms;
+allow parts_app vendor_sysfs_kgsl_gpu_model:file r_file_perms;
+
+# Adreno GPU config (/data/vendor/gpu) read by RenderThread / GPU Manager
+allow parts_app vendor_gpu_config_file:dir r_dir_perms;
+allow parts_app vendor_gpu_config_file:file r_file_perms;
+
+# QSPM backs GPU Manager; register as an official client so the service find is legal under qcom's neverallow.
+hal_client_domain(parts_app, vendor_hal_qspmhal)

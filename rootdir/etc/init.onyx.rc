@@ -43,6 +43,8 @@ on boot
 
     #MIUI ADD:Thermal_NodeReq
     chown system system /sys/class/thermal/thermal_message/sconfig
+    # 0666 so NotGameTurbo (platform_app) can write the thermal scenario.
+    chmod 0666 /sys/class/thermal/thermal_message/sconfig
     chown system system /sys/class/thermal/thermal_message/balance_mode
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/torch_real_level
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/flash_state
@@ -52,6 +54,50 @@ on boot
     chown system system /sys/class/thermal/thermal_message/board_sensor_temp_comp
     chown system system /sys/class/thermal/thermal_message/cpu_nolimit_temp
     #END Thermal_NodeReq
+
+    # Parts: CPU core control
+    chown system system /sys/devices/system/cpu/cpu0/online
+    chown system system /sys/devices/system/cpu/cpu1/online
+    chown system system /sys/devices/system/cpu/cpu2/online
+    chown system system /sys/devices/system/cpu/cpu3/online
+    chown system system /sys/devices/system/cpu/cpu4/online
+    chown system system /sys/devices/system/cpu/cpu5/online
+    chown system system /sys/devices/system/cpu/cpu6/online
+    chown system system /sys/devices/system/cpu/cpu7/online
+    chmod 0660 /sys/devices/system/cpu/cpu0/online
+    chmod 0660 /sys/devices/system/cpu/cpu1/online
+    chmod 0660 /sys/devices/system/cpu/cpu2/online
+    chmod 0660 /sys/devices/system/cpu/cpu3/online
+    chmod 0660 /sys/devices/system/cpu/cpu4/online
+    chmod 0660 /sys/devices/system/cpu/cpu5/online
+    chmod 0660 /sys/devices/system/cpu/cpu6/online
+    chmod 0660 /sys/devices/system/cpu/cpu7/online
+
+    # Parts: CPU governor on the big and prime clusters; 0664 so the CPUInfo overlay (platform_app) can read it.
+    chown system system /sys/devices/system/cpu/cpufreq/policy2/scaling_governor
+    chown system system /sys/devices/system/cpu/cpufreq/policy5/scaling_governor
+    chown system system /sys/devices/system/cpu/cpufreq/policy7/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy2/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy5/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpufreq/policy7/scaling_governor
+
+    # Parts: GPU manager
+    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/governor
+    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
+    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+    chown system system /sys/class/kgsl/kgsl-3d0/force_clk_on
+    chown system system /sys/class/kgsl/kgsl-3d0/force_bus_on
+    chown system system /sys/class/kgsl/kgsl-3d0/force_rail_on
+    chown system system /sys/class/kgsl/kgsl-3d0/force_no_nap
+    chown system system /sys/class/kgsl/kgsl-3d0/bus_split
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/devfreq/governor
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/force_clk_on
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/force_bus_on
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/force_rail_on
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/force_no_nap
+    chmod 0664 /sys/class/kgsl/kgsl-3d0/bus_split
 
     # Xiaomi touch
     chown system system /sys/class/touch/touch_dev/fod_longpress_gesture_enabled

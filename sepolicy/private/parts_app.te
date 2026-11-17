@@ -1,11 +1,18 @@
-type parts_app, domain;
 typeattribute parts_app mlstrustedsubject;
 
 app_domain(parts_app)
+# app_api_service find is granted per-domain in AOSP (not to appdomain); needed for clipboard/uimode so Compose UI can start.
+allow parts_app app_api_service:service_manager find;
 
 allow parts_app activity_service:service_manager find;
 allow parts_app activity_task_service:service_manager find;
 allow parts_app audio_service:service_manager find;
+# ClearSpeakerActivity blocks on media.audio_flinger and ANRs without this.
+allow parts_app audioserver_service:service_manager find;
+# MediaPlayer needs the same media service access any app domain gets.
+allow parts_app mediaserver_service:service_manager find;
+allow parts_app mediaextractor_service:service_manager find;
+allow parts_app mediametrics_service:service_manager find;
 allow parts_app netstats_service:service_manager find;
 allow parts_app vendor_hal_displayfeature_xiaomi_service:service_manager find;
 binder_call(parts_app, vendor_hal_displayfeature_xiaomi_default)
@@ -13,3 +20,16 @@ binder_call(parts_app, vendor_hal_displayfeature_xiaomi_default)
 allow parts_app system_app_data_file:dir create_dir_perms;
 allow parts_app system_app_data_file:file create_file_perms;
 allow parts_app system_app_data_file:lnk_file create_file_perms;
+
+# SurfaceFlinger saturation control (Startup receiver + SaturationActivity)
+allow parts_app surfaceflinger_service:service_manager find;
+binder_call(parts_app, surfaceflinger)
+
+# CPU core control and cpufreq (Core Control, Kernel Manager)
+allow parts_app sysfs_devices_system_cpu:dir search;
+allow parts_app sysfs_devices_system_cpu:file rw_file_perms;
+allow parts_app sysfs_devices_system_cpu:lnk_file read;
+
+# Thermal profiles via /sys/class/thermal/thermal_message/sconfig
+allow parts_app sysfs_thermal:dir search;
+allow parts_app sysfs_thermal:file rw_file_perms;

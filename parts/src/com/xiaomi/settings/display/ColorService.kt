@@ -164,6 +164,7 @@ class ColorService : Service() {
 
         private val DEFAULT_COLOR_MODE = SystemProperties.getInt("persist.sys.sf.native_mode", 0)
 
+        @JvmStatic
         fun startService(context: Context) {
             context.startServiceAsUser(
                 Intent(context, ColorService::class.java),

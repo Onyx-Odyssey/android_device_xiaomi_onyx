@@ -6,4 +6,5 @@
 (typeattributeset new_objects
   ( new_objects
     vendor_hal_displayfeature_xiaomi_default
-    vendor_hal_displayfeature_xiaomi_service))
+    vendor_hal_displayfeature_xiaomi_service
+    parts_app))

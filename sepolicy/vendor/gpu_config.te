@@ -1,0 +1,7 @@
+# Adreno reads /data/vendor/gpu/qgl_config.txt for per-app GPU tuning.
+allow { gmscore_app platform_app priv_app system_app untrusted_app_all } vendor_gpu_config_file:dir r_dir_perms;
+allow { gmscore_app platform_app priv_app system_app untrusted_app_all } vendor_gpu_config_file:file r_file_perms;
+allow hal_camera_default vendor_gpu_config_file:dir r_dir_perms;
+allow hal_camera_default vendor_gpu_config_file:file r_file_perms;
+allow { hal_graphics_allocator_default hal_graphics_composer_default } vendor_gpu_config_file:dir r_dir_perms;
+allow { hal_graphics_allocator_default hal_graphics_composer_default } vendor_gpu_config_file:file r_file_perms;
