@@ -11,4 +11,7 @@
         <item>restart_recovery</item>
         <item>restart_bootloader</item>
     </string-array>
+
+    <!-- Re-enable charging after a small drop below the configured charge limit -->
+    <integer name="config_chargingControlBatteryRechargeMargin">1</integer>
 </resources>
