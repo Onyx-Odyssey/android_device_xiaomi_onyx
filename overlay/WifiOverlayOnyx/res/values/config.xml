@@ -185,4 +185,8 @@
 
     <!-- Boolean indicating whether 802.11r Fast BSS Transition is enabled on this platform -->
     <bool translatable="false" name="config_wifi_fast_bss_transition_enabled">true</bool>
+
+    <!-- Indicates that STA + bridged AP concurrency mode is supported on this device provided
+         that the device interface combination allows for it -->
+    <bool translatable="false" name="config_wifiStaWithBridgedSoftApConcurrencySupported">true</bool>
 </resources>
