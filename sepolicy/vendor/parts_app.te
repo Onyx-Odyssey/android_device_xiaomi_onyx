@@ -11,3 +11,9 @@ allow parts_app vendor_gpu_config_file:file r_file_perms;
 
 # QSPM backs GPU Manager; register as an official client so the service find is legal under qcom's neverallow.
 hal_client_domain(parts_app, vendor_hal_qspmhal)
+
+# Battery and charger sysfs access (Charging Limiter, Thermal Limiter)
+allow parts_app vendor_sysfs_battery_supply:dir search;
+allow parts_app vendor_sysfs_battery_supply:file r_file_perms;
+allow parts_app vendor_sysfs_xm_power:dir r_dir_perms;
+allow parts_app vendor_sysfs_xm_power:file rw_file_perms;

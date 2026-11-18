@@ -21,4 +21,18 @@ public class Constants {
     // Saturation
     public static final String KEY_SATURATION = "saturation";
     public static final String KEY_SATURATION_PREVIEW = "saturation_preview";
+
+    // Thermal Limiter
+    public static final String KEY_THERMAL_LIMITER = "thermal_limiter";
+    public static final String KEY_THERMAL_LIMITER_APPS = "thermal_limiter_apps";
+    public static final String KEY_TEMP_WARM = "thermal_limiter_temp_warm";
+    public static final String KEY_TEMP_HIGH = "thermal_limiter_temp_high";
+    public static final String KEY_TEMP_CRITICAL = "thermal_limiter_temp_critical";
+
+    // Charging Limiter
+    public static final String KEY_CHARGING_LIMITER = "charging_limiter";
+    public static final String KEY_CHARGING_LIMITER_PROFILE = "charging_limiter_profile";
+
+    // USB-OTG
+    public static final String KEY_OTG_SWITCH = "otg_switch";
 }

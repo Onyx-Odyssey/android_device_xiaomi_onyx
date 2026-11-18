@@ -33,3 +33,10 @@ allow parts_app sysfs_devices_system_cpu:lnk_file read;
 # Thermal profiles via /sys/class/thermal/thermal_message/sconfig
 allow parts_app sysfs_thermal:dir search;
 allow parts_app sysfs_thermal:file rw_file_perms;
+
+# Battery telemetry for Thermal Limiter
+allow parts_app sysfs_batteryinfo:dir r_dir_perms;
+allow parts_app sysfs_batteryinfo:{ file lnk_file } r_file_perms;
+
+# System properties
+set_prop(parts_app, system_prop)

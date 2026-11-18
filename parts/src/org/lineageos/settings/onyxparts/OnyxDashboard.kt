@@ -99,6 +99,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import org.lineageos.settings.R
 import org.lineageos.settings.corecontrol.CoreControlActivity
+import org.lineageos.settings.deviceextras.DeviceExtrasActivity
 import org.lineageos.settings.gpumanager.GpuManagerActivity
 import org.lineageos.settings.kernelmanager.KernelManagerActivity
 import org.lineageos.settings.saturation.SaturationActivity
@@ -109,6 +110,7 @@ import org.lineageos.settings.ui.theme.ExpressiveShapes
 import org.lineageos.settings.ui.theme.ExpressiveTheme
 import org.lineageos.settings.ui.theme.ExpressiveTypography
 import org.lineageos.settings.ui.theme.expressiveBounceClick
+import androidx.compose.material3.Switch
 
 data class OnyxFeature(
     val title: String,
@@ -161,6 +163,12 @@ fun OnyxDashboard(onBackPressed: () -> Unit) {
             stringResource(R.string.onyx_clear_speaker_summary),
             R.drawable.ic_clear_speaker,
             ClearSpeakerActivity::class.java
+        ),
+        OnyxFeature(
+            stringResource(R.string.device_extras_title),
+            stringResource(R.string.device_extras_summary),
+            R.drawable.ic_settings_device,
+            DeviceExtrasActivity::class.java
         )
     )
 

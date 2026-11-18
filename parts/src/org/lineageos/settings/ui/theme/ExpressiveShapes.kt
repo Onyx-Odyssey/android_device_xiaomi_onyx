@@ -53,14 +53,14 @@ object ExpressiveShapes {
     val CornerExtraExtraLarge: Dp = 48.dp
 
     val ShapeNone: Shape = RectangleShape
-    val ShapeExtraSmall: Shape = RoundedCornerShape(CornerExtraSmall)
-    val ShapeSmall: Shape = RoundedCornerShape(CornerSmall)
-    val ShapeMedium: Shape = RoundedCornerShape(CornerMedium)
-    val ShapeLarge: Shape = RoundedCornerShape(CornerLarge)
-    val ShapeLargeIncreased: Shape = RoundedCornerShape(CornerLargeIncreased)
-    val ShapeExtraLarge: Shape = RoundedCornerShape(CornerExtraLarge)
-    val ShapeExtraLargeIncreased: Shape = RoundedCornerShape(CornerExtraLargeIncreased)
-    val ShapeExtraExtraLarge: Shape = RoundedCornerShape(CornerExtraExtraLarge)
+    val ShapeExtraSmall: RoundedCornerShape = RoundedCornerShape(CornerExtraSmall)
+    val ShapeSmall: RoundedCornerShape = RoundedCornerShape(CornerSmall)
+    val ShapeMedium: RoundedCornerShape = RoundedCornerShape(CornerMedium)
+    val ShapeLarge: RoundedCornerShape = RoundedCornerShape(CornerLarge)
+    val ShapeLargeIncreased: RoundedCornerShape = RoundedCornerShape(CornerLargeIncreased)
+    val ShapeExtraLarge: RoundedCornerShape = RoundedCornerShape(CornerExtraLarge)
+    val ShapeExtraLargeIncreased: RoundedCornerShape = RoundedCornerShape(CornerExtraLargeIncreased)
+    val ShapeExtraExtraLarge: RoundedCornerShape = RoundedCornerShape(CornerExtraExtraLarge)
     val ShapeFull: Shape = CircleShape
 
     /**

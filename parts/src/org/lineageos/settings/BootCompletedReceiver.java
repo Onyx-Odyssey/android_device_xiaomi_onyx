@@ -70,6 +70,12 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         // Restore the display color mode (onyx displayfeature HAL)
         ColorService.startService(context);
 
+        // Start ThermalLimiter if enabled
+        if (androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(Constants.KEY_THERMAL_LIMITER, false)) {
+            org.lineageos.settings.thermallimiter.ThermalLimiter.startMonitoring(context);
+        }
+
 
     }
 
