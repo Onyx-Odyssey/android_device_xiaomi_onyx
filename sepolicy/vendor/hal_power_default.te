@@ -1,3 +1,11 @@
+# ADPF updates app threads across per-app MLS categories.
+typeattribute hal_power_default mlstrustedsubject;
+
+# Apply per-thread uclamp for app and SurfaceFlinger hint sessions.
+allow hal_power_default self:global_capability_class_set sys_nice;
+allow hal_power_default { appdomain surfaceflinger }:process setsched;
+
 allow hal_power_default proc_walt:dir search;
 allow hal_power_default proc_walt:file rw_file_perms;
 allow hal_power_default vendor_sysfs_msm_perf:file rw_file_perms;
+
