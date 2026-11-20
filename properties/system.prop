@@ -59,3 +59,11 @@ persist.vendor.vonr_setting_support=1
 
 # WFD
 persist.debug.wfd.enable=1
+
+# Log
+persist.log.tag.AdrenoVK-0=S
+persist.log.tag.Gralloc4=S
+persist.log.tag.PipelineWatcher=S
+persist.log.tag.SensorService=S
+persist.log.tag.vendor.qti.vibratorOL=S
+persist.log.tag.minksocket=S
