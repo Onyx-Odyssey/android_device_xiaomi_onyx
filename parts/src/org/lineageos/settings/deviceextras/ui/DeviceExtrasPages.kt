@@ -149,7 +149,7 @@ internal fun ThermalAppsPage(state: DeviceExtrasState, model: DeviceExtrasViewMo
                 ) {
                     itemsIndexed(visibleApps, key = { _, app -> app.packageName }) { index, app ->
                         val checked = app.packageName in state.selectedApps
-                        val enabled = !state.saving && !state.loadFailed
+                        val enabled = !state.loadFailed
                         val alpha = if (enabled) 1f else 0.38f
                         val toggle = touchAction { model.selectApp(app.packageName, !checked) }
                         ExtrasListItem(
@@ -194,7 +194,7 @@ internal fun ThermalAppsPage(state: DeviceExtrasState, model: DeviceExtrasViewMo
 @Composable
 internal fun ThermalThresholdsPage(state: DeviceExtrasState, model: DeviceExtrasViewModel, back: () -> Unit) {
     val scroll = rememberLazyListState()
-    val enabled = state.thermalEnabled && !state.saving && !state.loadFailed
+    val enabled = state.thermalEnabled && !state.loadFailed
     ExtrasScaffold(stringResource(R.string.thermal_thresholds_title), back,
         subtitle = stringResource(R.string.thermal_thresholds_subtitle)) { padding ->
         Box(Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding),
@@ -264,7 +264,7 @@ private fun ThresholdCard(
     last: Boolean = false,
     onCommit: (Int) -> Unit,
 ) {
-    var draft by remember(value, revision, enabled) { mutableFloatStateOf(value.toFloat()) }
+    var draft by remember(value, revision) { mutableFloatStateOf(value.toFloat()) }
     val motion = MaterialTheme.motionScheme
     val alpha = if (enabled) 1f else 0.38f
     val temperatureDescription = stringResource(R.string.device_integer_temperature, draft.roundToInt())

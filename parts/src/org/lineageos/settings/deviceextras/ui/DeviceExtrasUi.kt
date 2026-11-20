@@ -159,7 +159,7 @@ private fun DeviceExtrasHome(
                                 SwitchCard(
                                     R.drawable.ic_charging, stringResource(R.string.charging_limiter_title),
                                     stringResource(R.string.charging_switch_detail), state.chargingEnabled,
-                                    !state.saving && !state.loadFailed,
+                                    !state.loadFailed,
                                     last = false, onChange = model::setChargingEnabled,
                                 )
                                 ChargingProfiles(state, model::setChargingProfile,
@@ -176,7 +176,7 @@ private fun DeviceExtrasHome(
                             if (!state.thermalEnabled) stringResource(R.string.thermal_switch_detail)
                                 else if (state.selectedApps.isEmpty()) state.thermalStatus
                                 else stringResource(R.string.thermal_switch_active_detail, state.thermalStatus),
-                            state.thermalEnabled, !state.saving && !state.loadFailed, last = false,
+                            state.thermalEnabled, !state.loadFailed, last = false,
                             onChange = model::setThermalEnabled,
                         )
                         Spacer(Modifier.height(ExtrasSegmentedGap))
@@ -185,14 +185,14 @@ private fun DeviceExtrasHome(
                             pluralStringResource(R.plurals.thermal_apps_count,
                                 state.selectedApps.size, state.selectedApps.size),
                             summary = stringResource(R.string.thermal_limiter_apps_summary),
-                            enabled = state.thermalEnabled && !state.saving && !state.loadFailed,
+                            enabled = state.thermalEnabled && !state.loadFailed,
                         ) { navigate("apps") }
                         Spacer(Modifier.height(ExtrasSegmentedGap))
                         NavigationCard(
                             R.drawable.ic_thermal_temp, stringResource(R.string.thermal_thresholds_short_title),
                             stringResource(R.string.thermal_thresholds_values, state.warm, state.high, state.critical),
                             summary = stringResource(R.string.thermal_thresholds_summary),
-                            enabled = state.thermalEnabled && !state.saving && !state.loadFailed, last = true,
+                            enabled = state.thermalEnabled && !state.loadFailed, last = true,
                         ) { navigate("thresholds") }
                     }
                 }
@@ -202,7 +202,7 @@ private fun DeviceExtrasHome(
                         SwitchCard(
                             R.drawable.ic_otg_mode, stringResource(R.string.otg_mode_title),
                             stringResource(R.string.otg_mode_summary), state.otgEnabled,
-                            !state.saving && !state.loadFailed,
+                            !state.loadFailed,
                             onChange = model::setOtgEnabled,
                         )
                     }
@@ -227,7 +227,7 @@ private fun ChargingProfiles(
 ) {
     val values = listOf("slow", "mid", "fast")
     val labels = listOf(R.string.charging_profile_slow, R.string.charging_profile_mid, R.string.charging_profile_fast)
-    val enabled = state.chargingEnabled && !state.saving && !state.loadFailed
+    val enabled = state.chargingEnabled && !state.loadFailed
     val motion = MaterialTheme.motionScheme
     val groupLabel = stringResource(R.string.charging_limiter_profile_title)
     val summary = if (!state.chargingEnabled) R.string.charging_profiles_disabled

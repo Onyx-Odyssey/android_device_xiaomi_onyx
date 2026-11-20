@@ -139,11 +139,16 @@ class DeviceExtrasViewModel(application: Application) : AndroidViewModel(applica
 
     private fun change(
         error: Int = R.string.device_setting_error,
+        optimistic: ((DeviceExtrasState) -> DeviceExtrasState)? = null,
         afterSuccess: () -> Unit = {},
         write: () -> Boolean,
     ) {
         if (mutableState.value.saving || mutableState.value.loadFailed) return
-        mutableState.update { it.copy(saving = true) }
+        val previousState = mutableState.value
+        mutableState.update { current ->
+            val updated = optimistic?.invoke(current) ?: current
+            updated.copy(saving = true)
+        }
         viewModelScope.launch {
             settingsLock.withLock {
                 try {
@@ -151,11 +156,13 @@ class DeviceExtrasViewModel(application: Application) : AndroidViewModel(applica
                         afterSuccess()
                         refreshLocked()
                     } else {
+                        mutableState.value = previousState.copy(saving = false)
                         mutableMessages.tryEmit(error)
                     }
                 } catch (cancelled: CancellationException) {
                     throw cancelled
                 } catch (exception: Exception) {
+                    mutableState.value = previousState.copy(saving = false)
                     mutableMessages.tryEmit(error)
                 } finally {
                     mutableState.update { it.copy(saving = false, settingsRevision = it.settingsRevision + 1) }
@@ -164,31 +171,41 @@ class DeviceExtrasViewModel(application: Application) : AndroidViewModel(applica
         }
     }
 
-    fun setChargingEnabled(enabled: Boolean) = change(R.string.charging_limiter_error) {
+    fun setChargingEnabled(enabled: Boolean) = change(
+        error = R.string.charging_limiter_error,
+        optimistic = { it.copy(chargingEnabled = enabled) },
+    ) {
         ChargingLimiter.setEnabled(context, enabled)
     }
 
-    fun setChargingProfile(profile: String) = change(R.string.charging_limiter_error) {
+    fun setChargingProfile(profile: String) = change(
+        error = R.string.charging_limiter_error,
+        optimistic = { it.copy(chargingProfile = profile) },
+    ) {
         ChargingLimiter.setProfile(context, profile)
     }
 
-    fun setThermalEnabled(enabled: Boolean) = change(afterSuccess = {
-        if (enabled) ThermalLimiter.startMonitoring(context) else ThermalLimiter.stopMonitoring()
-        ThermalLimiterTileService.refreshTile()
-    }) {
+    fun setThermalEnabled(enabled: Boolean) = change(
+        optimistic = { it.copy(thermalEnabled = enabled) },
+        afterSuccess = {
+            if (enabled) ThermalLimiter.startMonitoring(context) else ThermalLimiter.stopMonitoring()
+            ThermalLimiterTileService.refreshTile()
+        },
+    ) {
         prefs.edit().putBoolean(Constants.KEY_THERMAL_LIMITER, enabled).apply()
         true
     }
 
-    fun setOtgEnabled(enabled: Boolean) = change(afterSuccess = {
-        TileService.requestListeningState(context, ComponentName(context, OTGTileService::class.java))
-    }) {
+    fun setOtgEnabled(enabled: Boolean) = change(
+        optimistic = { it.copy(otgEnabled = enabled) },
+        afterSuccess = {
+            TileService.requestListeningState(context, ComponentName(context, OTGTileService::class.java))
+        },
+    ) {
         OTGModeSwitch.setEnabled(context, enabled)
     }
 
-    fun setThreshold(index: Int, value: Int) = change(afterSuccess = {
-        ThermalLimiter.requestImmediateCheck()
-    }) {
+    fun setThreshold(index: Int, value: Int) {
         val current = mutableState.value
         var warm = current.warm
         var high = current.high
@@ -209,17 +226,31 @@ class DeviceExtrasViewModel(application: Application) : AndroidViewModel(applica
                 high = minOf(high, critical - 1)
                 warm = minOf(warm, high - 1)
             }
-            else -> return@change false
+            else -> return
         }
-        prefs.edit()
-            .putInt(ThermalLimiter.KEY_TEMP_WARM, warm)
-            .putInt(ThermalLimiter.KEY_TEMP_HIGH, high)
-            .putInt(ThermalLimiter.KEY_TEMP_CRITICAL, critical)
-            .apply()
-        true
+        change(
+            optimistic = { it.copy(warm = warm, high = high, critical = critical) },
+            afterSuccess = { ThermalLimiter.requestImmediateCheck() },
+        ) {
+            prefs.edit()
+                .putInt(ThermalLimiter.KEY_TEMP_WARM, warm)
+                .putInt(ThermalLimiter.KEY_TEMP_HIGH, high)
+                .putInt(ThermalLimiter.KEY_TEMP_CRITICAL, critical)
+                .apply()
+            true
+        }
     }
 
-    fun resetThresholds() = change(afterSuccess = { ThermalLimiter.requestImmediateCheck() }) {
+    fun resetThresholds() = change(
+        optimistic = {
+            it.copy(
+                warm = ThermalLimiter.TEMP_DEFAULT_WARM,
+                high = ThermalLimiter.TEMP_DEFAULT_HIGH,
+                critical = ThermalLimiter.TEMP_DEFAULT_CRITICAL,
+            )
+        },
+        afterSuccess = { ThermalLimiter.requestImmediateCheck() },
+    ) {
         prefs.edit()
             .putInt(ThermalLimiter.KEY_TEMP_WARM, ThermalLimiter.TEMP_DEFAULT_WARM)
             .putInt(ThermalLimiter.KEY_TEMP_HIGH, ThermalLimiter.TEMP_DEFAULT_HIGH)
@@ -228,7 +259,13 @@ class DeviceExtrasViewModel(application: Application) : AndroidViewModel(applica
         true
     }
 
-    fun selectApp(packageName: String, selected: Boolean) = change {
+    fun selectApp(packageName: String, selected: Boolean) = change(
+        optimistic = { current ->
+            val set = current.selectedApps.toMutableSet()
+            if (selected) set.add(packageName) else set.remove(packageName)
+            current.copy(selectedApps = set)
+        },
+    ) {
         val packages = ThermalLimiter.getSelectedApps(context).toMutableSet()
         if (selected) packages.add(packageName) else packages.remove(packageName)
         ThermalLimiter.setSelectedApps(context, packages)
