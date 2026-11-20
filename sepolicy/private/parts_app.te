@@ -34,6 +34,9 @@ allow parts_app sysfs_devices_system_cpu:lnk_file read;
 allow parts_app sysfs_thermal:dir search;
 allow parts_app sysfs_thermal:file rw_file_perms;
 
+# Lunaris theme engine
+allow parts_app theme_engine_service:service_manager find;
+
 # Battery telemetry for Thermal Limiter
 allow parts_app sysfs_batteryinfo:dir r_dir_perms;
 allow parts_app sysfs_batteryinfo:{ file lnk_file } r_file_perms;
