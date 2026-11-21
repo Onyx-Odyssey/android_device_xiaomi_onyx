@@ -39,6 +39,10 @@ class ThermalService : Service() {
 
     private val taskListener =
         object : TaskStackListener() {
+            override fun onTaskFocusChanged(taskId: Int, focused: Boolean) {
+                if (focused) onTaskStackChanged()
+            }
+
             override fun onTaskStackChanged() {
                 runCatching {
                     val focusedTask = ActivityTaskManager.getService().focusedRootTaskInfo
