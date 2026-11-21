@@ -375,6 +375,7 @@ PRODUCT_PACKAGES += \
     FrameworkOverlayOnyx \
     FrameworkOverlayOnyxCN \
     FrameworkOverlayOnyxGL \
+    FrameworkHapticsOverlayOnyx \
     Launcher3DeviceOverlayOnyx \
     LineageSDKOverlayOnyx \
     LineageSDKOverlayOnyxCN \
