@@ -67,8 +67,12 @@ public class ThermalLimiterTileService extends TileService {
             tile.setState(enabled ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
 
             if (enabled) {
-                float temp = ThermalLimiter.getBatteryTemperature() / 10.0f;
-                tile.setSubtitle(String.format("%.1f°C", temp));
+                Integer temp = ThermalLimiter.getBatteryTemperature(this);
+                if (temp != null) {
+                    tile.setSubtitle(String.format("%.1f°C", temp / 10.0f));
+                } else {
+                    tile.setSubtitle(null);
+                }
             } else {
                 tile.setSubtitle(null);
             }

@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.hardware.display.DisplayManager;
+import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -36,6 +37,7 @@ import java.util.Set;
 
 public class ThermalLimiter {
     private static final String TAG = "ThermalLimiter";
+    private static final String KEY_THERMAL_STATE = "thermal_limiter_state";
 
     public static final String KEY_TEMP_WARM = Constants.KEY_TEMP_WARM;
     public static final String KEY_TEMP_HIGH = Constants.KEY_TEMP_HIGH;
@@ -47,8 +49,9 @@ public class ThermalLimiter {
     public static final int TEMP_MIN = 35;
     public static final int TEMP_MAX = 60;
 
-    private static final String BATTERY_TEMP = "/sys/class/power_supply/battery/temp";
-    private static final String BATTERY_TEMP_ZONE = "/sys/class/thermal/thermal_zone51/temp";
+    private static final int INTERVAL_IDLE = 4000;
+    private static final int INTERVAL_SCREEN_OFF = 30000;
+    private static final int INTERVAL_RETRY = 1000;
 
     // Onyx SM8735 (2+5+1) CPU clusters
     private static final String CPU_LITTLE_MAX_FREQ = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq";
@@ -103,11 +106,6 @@ public class ThermalLimiter {
     private static String mPrimeCeiling;
 
     public static boolean isSupported() {
-        if (!FileUtils.isFileReadable(BATTERY_TEMP) && !FileUtils.isFileReadable(BATTERY_TEMP_ZONE)) {
-            Log.w(TAG, "Battery temperature node not readable");
-            return false;
-        }
-
         boolean cpuSupported = FileUtils.isFileWritable(CPU_LITTLE_MAX_FREQ) &&
                                FileUtils.isFileWritable(CPU_MID_MAX_FREQ) &&
                                FileUtils.isFileWritable(CPU_PRIME_MAX_FREQ);
@@ -127,7 +125,8 @@ public class ThermalLimiter {
 
         mContext = context.getApplicationContext();
         mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        mCurrentThermalState = STATE_NORMAL;
+        mCurrentThermalState = Math.max(STATE_NORMAL, Math.min(STATE_CRITICAL,
+                mPrefs.getInt(KEY_THERMAL_STATE, STATE_NORMAL)));
         mIsMonitoring = true;
         mHandler = new Handler(Looper.getMainLooper());
         cacheClusterCeilings();
@@ -185,17 +184,20 @@ public class ThermalLimiter {
 
     private static int checkThermals() {
         if (!isInteractive()) {
-            return 30000;
+            return INTERVAL_SCREEN_OFF;
         }
 
         final String foreground = getForegroundPackage();
         if (foreground == null || !isPackageThrottled(foreground)) {
             releaseThrottle();
-            return 4000;
+            return INTERVAL_IDLE;
         }
 
         mThrottledPackage = foreground;
-        final int temperature = getBatteryTemperature();
+        final Integer temperature = getBatteryTemperature();
+        if (temperature == null) {
+            return INTERVAL_RETRY;
+        }
         adjustFrequencies(temperature);
         return getPollingInterval(temperature);
     }
@@ -207,30 +209,39 @@ public class ThermalLimiter {
         }
         mThrottledPackage = null;
         resetFrequencies();
-        ThermalLimiterTileService.updateTileState("NORMAL", getBatteryTemperature() / 10.0f);
+        final Integer temp = getBatteryTemperature();
+        ThermalLimiterTileService.updateTileState("NORMAL", temp != null ? temp / 10.0f : 0.0f);
     }
 
-    public static int getBatteryTemperature() {
-        String tempStr = FileUtils.readOneLine(BATTERY_TEMP);
-        if (tempStr == null) {
-            tempStr = FileUtils.readOneLine(BATTERY_TEMP_ZONE);
-        }
-        if (tempStr == null) {
-            return 0;
+    public static Integer getBatteryTemperature() {
+        return getBatteryTemperature(mContext);
+    }
+
+    public static Integer getBatteryTemperature(Context context) {
+        if (context == null) {
+            Log.e(TAG, "Failed to read battery temperature: context is null");
+            return null;
         }
         try {
-            int temp = Integer.parseInt(tempStr.trim());
-            if (temp > 10000) {
-                temp = temp / 100;
-            } else if (temp > 1000) {
-                temp = temp / 10;
+            IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+            Intent batteryStatus = context.registerReceiver(null, filter);
+
+            if (batteryStatus == null || !batteryStatus.hasExtra(BatteryManager.EXTRA_TEMPERATURE)) {
+                Log.e(TAG, "Failed to get battery temperature from battery status");
+                return null;
             }
-            if (temp < 0 || temp > 800) {
-                return 0;
+
+            int temp = batteryStatus.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0);
+
+            if (temp < -400 || temp > 800) {
+                Log.w(TAG, "Ignored suspicious temperature reading: " + temp);
+                return null;
             }
+
             return temp;
-        } catch (NumberFormatException e) {
-            return 0;
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to read battery temperature", e);
+            return null;
         }
     }
 
@@ -286,6 +297,10 @@ public class ThermalLimiter {
 
         if (newState != mCurrentThermalState) {
             mCurrentThermalState = newState;
+            if (mPrefs != null) {
+                mPrefs.edit().putInt(KEY_THERMAL_STATE, newState).apply();
+            }
+
             setClusterFrequency(CPU_LITTLE_CORES, littleFreq);
             setClusterFrequency(CPU_MID_CORES, midFreq);
             setClusterFrequency(CPU_PRIME_CORES, primeFreq);
@@ -312,6 +327,9 @@ public class ThermalLimiter {
         }
 
         mCurrentThermalState = STATE_NORMAL;
+        if (mPrefs != null) {
+            mPrefs.edit().putInt(KEY_THERMAL_STATE, STATE_NORMAL).apply();
+        }
     }
 
     private static int[] getThresholds() {
