@@ -9,6 +9,7 @@ package org.lineageos.settings.speaker
 import android.app.Application
 import android.content.Context
 import android.media.AudioAttributes
+import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Handler
@@ -25,6 +26,13 @@ class ClearSpeakerViewModel(application: Application) : AndroidViewModel(applica
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     private var mediaPlayer: MediaPlayer? = null
     private val handler = Handler(Looper.getMainLooper())
+    private var audioFocusRequest: AudioFocusRequest? = null
+
+    private val audioFocusChangeListener = AudioManager.OnAudioFocusChangeListener { focusChange ->
+        if (focusChange != AudioManager.AUDIOFOCUS_GAIN) {
+            stopPlaying()
+        }
+    }
 
     private val _isPlaying = MutableStateFlow(false)
     val isPlaying: StateFlow<Boolean> = _isPlaying
@@ -45,14 +53,27 @@ class ClearSpeakerViewModel(application: Application) : AndroidViewModel(applica
 
     private fun startPlaying(): Boolean {
         try {
+            val attributes =
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build()
+
+            val request =
+                AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
+                    .setAudioAttributes(attributes)
+                    .setWillPauseWhenDucked(true)
+                    .setOnAudioFocusChangeListener(audioFocusChangeListener, handler)
+                    .build()
+
+            if (audioManager.requestAudioFocus(request) != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                return false
+            }
+            audioFocusRequest = request
+
             audioManager.setParameters("status_earpiece_clean=on")
             mediaPlayer = MediaPlayer().apply {
-                setAudioAttributes(
-                    AudioAttributes.Builder()
-                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                        .build()
-                )
+                setAudioAttributes(attributes)
                 setLooping(true)
                 val file = context.resources.openRawResourceFd(R.raw.clear_speaker_sound)
                 setDataSource(file.fileDescriptor, file.startOffset, file.length)
@@ -72,6 +93,10 @@ class ClearSpeakerViewModel(application: Application) : AndroidViewModel(applica
 
     fun stopPlaying() {
         handler.removeCallbacks(stopRunnable)
+        audioFocusRequest?.let {
+            audioManager.abandonAudioFocusRequest(it)
+            audioFocusRequest = null
+        }
         mediaPlayer?.let {
             if (it.isPlaying) {
                 it.stop()
