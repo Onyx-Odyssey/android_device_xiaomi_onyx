@@ -7,4 +7,10 @@
     <!-- Follow touch intensity instead of the fixed-strength keyboard toggle.
          Product placement overrides the ROM's product-level keyboard policy. -->
     <bool name="config_keyboardVibrationSettingsSupported">false</bool>
+
+    <!-- Vibrator pattern for feedback when selecting an hour/minute tick of a Clock -->
+    <integer-array name="config_clockTickVibePattern">
+        <item>0</item>
+        <item>30</item>
+    </integer-array>
 </resources>
