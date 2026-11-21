@@ -21,3 +21,6 @@ allow vendor_init sysfs:lnk_file setattr;
 # FPS info
 allow init vendor_sysfs_graphics:dir search;
 allow init vendor_sysfs_graphics:file rw_file_perms;
+
+# Let system init unmount the SPU partition during shutdown.
+allow init vendor_spunvm_file:filesystem unmount;
