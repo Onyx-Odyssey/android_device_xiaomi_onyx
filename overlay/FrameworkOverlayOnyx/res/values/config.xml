@@ -864,6 +864,17 @@
          non-zero. -->
     <integer name="config_defaultPeakRefreshRate">120</integer>
 
+    <!-- Hold the panel at peak refresh rate during adaptive operation below
+         legacy brightness 55, independent of ambient light, to prevent
+         low-brightness luminance flicker. -->
+    <integer-array name="config_brightnessThresholdsOfPeakRefreshRate" translatable="false">
+        <item>55</item>
+    </integer-array>
+    <integer-array name="config_ambientThresholdsOfPeakRefreshRate" translatable="false">
+        <item>-1</item>
+    </integer-array>
+    <integer name="config_defaultRefreshRateInZone">120</integer>
+
     <!-- Whether the device enable the standalone (SA) mode of 5G NR.-->
     <bool name="config_telephony5gStandalone">true</bool>
 
