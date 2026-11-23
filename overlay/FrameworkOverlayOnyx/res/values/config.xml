@@ -36,6 +36,9 @@
     <!-- Flag indicating whether we should enable the adaptive sleep.-->
     <bool name="config_adaptive_sleep_available">true</bool>
 
+    <!-- Whether the device supports keyboard vibration -->
+    <bool name="config_keyboardVibrationSupported">true</bool>
+
     <!-- Fast brightness animation ramp rate in brightness units per second-->
     <integer name="config_brightness_ramp_rate_fast">4932</integer>
 
