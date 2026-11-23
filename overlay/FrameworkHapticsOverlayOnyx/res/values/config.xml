@@ -4,9 +4,8 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <!-- Follow touch intensity instead of the fixed-strength keyboard toggle.
-         Product placement overrides the ROM's product-level keyboard policy. -->
-    <bool name="config_keyboardVibrationSettingsSupported">false</bool>
+    <!-- Indicating if keyboard vibration settings supported or not. -->
+    <bool name="config_keyboardVibrationSettingsSupported">true</bool>
 
     <!-- Vibrator pattern for feedback when selecting an hour/minute tick of a Clock -->
     <integer-array name="config_clockTickVibePattern">
