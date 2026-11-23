@@ -661,6 +661,12 @@
             "Value": "1"
         },
         {
+            "PowerHint": "LOW_POWER",
+            "Node": "sysKernelMsmPerformanceParametersCpuMaxFreq",
+            "Duration": 0,
+            "Value": "0:1632000 1:1632000 2:1286400 3:1286400 4:1286400 5:2208000 6:2208000 7:1670400"
+        },
+        {
             "PowerHint": "INTERACTION",
             "Node": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveHighFreq",
             "Value": "1785600",
