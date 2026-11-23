@@ -625,6 +625,42 @@
             "Value": "30"
         },
         {
+            "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+            "Node": "UclampTAMin",
+            "Duration": 120,
+            "Value": "30"
+        },
+        {
+            "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+            "Node": "UclampFGMin",
+            "Duration": 120,
+            "Value": "30"
+        },
+        {
+            "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+            "Node": "UclampTALatency",
+            "Duration": 120,
+            "Value": "1"
+        },
+        {
+            "PowerHint": "GAME_LOADING",
+            "Node": "UclampTAMin",
+            "Duration": 1500,
+            "Value": "50"
+        },
+        {
+            "PowerHint": "GAME_LOADING",
+            "Node": "UclampFGMin",
+            "Duration": 1500,
+            "Value": "40"
+        },
+        {
+            "PowerHint": "GAME_LOADING",
+            "Node": "UclampTALatency",
+            "Duration": 1500,
+            "Value": "1"
+        },
+        {
             "PowerHint": "INTERACTION",
             "Node": "sysDevicesSystemCpuCpufreqPolicy0WaltAdaptiveHighFreq",
             "Value": "1785600",
